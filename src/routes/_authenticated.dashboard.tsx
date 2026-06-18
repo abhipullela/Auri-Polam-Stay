@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { fromKey, nightsBetween, toKey, MONTH_NAMES, entryCoversDay } from "@/lib/calendar-utils";
-import { BLOCK_REASON_LABELS, PAYMENT_LABELS, type Entry } from "@/lib/types";
+import { PAYMENT_LABELS, type Entry } from "@/lib/types";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — POLAM STAY" }] }),
