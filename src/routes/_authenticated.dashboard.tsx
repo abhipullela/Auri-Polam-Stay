@@ -177,5 +177,3 @@ function DashboardPage() {
   );
 }
 
-// keep import used for potential future block labels
-void BLOCK_REASON_LABELS;
