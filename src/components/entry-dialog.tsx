@@ -32,7 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { addDays, nightsBetween, toKey } from "@/lib/calendar-utils";
+import { addDays, fromKey, nightsBetween, toKey } from "@/lib/calendar-utils";
 import { useEntryMutations } from "@/hooks/use-entries";
 import type { BlockReason, Entry, EntryType, PaymentStatus } from "@/lib/types";
 
