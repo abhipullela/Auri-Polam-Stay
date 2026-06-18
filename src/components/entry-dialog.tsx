@@ -76,7 +76,7 @@ function buildInitial(
   return {
     type: defaultType,
     start_date: start,
-    end_date: toKey(addDays(new Date(start.split("-").map(Number).join("/")), 1)),
+    end_date: toKey(addDays(fromKey(start), 1)),
     guest_name: "",
     contact: "",
     payment_status: "unpaid",
