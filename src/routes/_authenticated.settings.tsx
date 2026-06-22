@@ -24,6 +24,7 @@ export const Route = createFileRoute("/_authenticated/settings")({
 
 function SettingsPage() {
   const doChange = useServerFn(changePassword);
+  const { interval, setInterval, options } = usePollInterval();
   const [current, setCurrent] = useState("");
   const [next, setNext] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -48,6 +49,13 @@ function SettingsPage() {
       setSaving(false);
     }
   }
+
+  const intervalLabels: Record<number, string> = {
+    5000: "5 seconds (fastest)",
+    15000: "15 seconds",
+    30000: "30 seconds",
+    60000: "60 seconds (lowest usage)",
+  };
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -105,6 +113,38 @@ function SettingsPage() {
             Update password
           </Button>
         </form>
+      </section>
+
+      <section className="mt-5 rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-soft)]">
+        <div className="mb-5 flex items-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary/12 text-primary">
+            <Clock className="h-5 w-5" />
+          </span>
+          <div>
+            <h2 className="font-display text-xl font-semibold">Calendar refresh rate</h2>
+            <p className="text-sm text-muted-foreground">
+              How often the calendar checks for new bookings. Longer intervals reduce database usage.
+            </p>
+          </div>
+        </div>
+        <div className="max-w-xs space-y-1.5">
+          <Label htmlFor="poll-interval">Refresh every</Label>
+          <Select
+            value={String(interval)}
+            onValueChange={(v) => setInterval(Number(v))}
+          >
+            <SelectTrigger id="poll-interval">
+              <SelectValue placeholder="Choose interval" />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((ms) => (
+                <SelectItem key={ms} value={String(ms)}>
+                  {intervalLabels[ms]}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </section>
 
       <section className="mt-5 grid gap-4 sm:grid-cols-2">
