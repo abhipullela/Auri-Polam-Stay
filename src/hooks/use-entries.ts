@@ -8,20 +8,22 @@ import {
   updateEntry,
   deleteEntry,
 } from "@/lib/entries.functions";
+import { usePollInterval } from "@/hooks/use-poll-interval";
 import type { Entry } from "@/lib/types";
 
 export const entriesKey = ["entries"] as const;
 
 /**
- * Loads all calendar entries and re-polls every few seconds so booking and
- * block changes made on any device show up here automatically.
+ * Loads all calendar entries and re-polls based on the user's chosen interval
+ * so booking and block changes made on any device show up automatically.
  */
 export function useEntries() {
   const fetchEntries = useServerFn(listEntries);
+  const { interval } = usePollInterval();
   return useQuery<Entry[]>({
     queryKey: entriesKey,
     queryFn: () => fetchEntries(),
-    refetchInterval: 5000,
+    refetchInterval: interval,
     refetchOnWindowFocus: true,
     staleTime: 0,
   });
