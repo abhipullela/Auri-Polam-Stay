@@ -2,12 +2,20 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
-import { KeyRound, ShieldCheck, Database, Loader2 } from "lucide-react";
+import { KeyRound, ShieldCheck, Database, Loader2, Clock } from "lucide-react";
 
 import { changePassword } from "@/lib/auth.functions";
+import { usePollInterval } from "@/hooks/use-poll-interval";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({ meta: [{ title: "Settings — POLAM STAY" }] }),
